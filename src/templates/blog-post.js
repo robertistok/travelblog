@@ -1,5 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
+import graphql from 'graphql';
 
 export default function Template({ data }) {
   const { markdownRemark: post } = data;
@@ -18,3 +20,25 @@ export default function Template({ data }) {
     </div>
   );
 }
+
+Template.propTypes = {
+  data: PropTypes.shape({
+    post: PropTypes.shape({
+      html: PropTypes.string,
+      frontmatter: PropTypes.shape({ title: PropTypes.string }),
+    }),
+  }),
+};
+
+export const pageQuery = graphql`
+  query BlogPostByPath($path: String!) {
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
+      frontmatter {
+        date
+        path
+        title
+      }
+    }
+  }
+`;
