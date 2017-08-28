@@ -1,9 +1,7 @@
-const path = require('path');
+const { templateTypes } = require('./src/utils/template-types');
 
 exports.createPages = ({ boundActionCreators, graphql }) => {
   const { createPage } = boundActionCreators;
-
-  const blogPostTemplate = path.resolve('src/templates/blog-post.js');
 
   return graphql(`{
     allMarkdownRemark(
@@ -19,6 +17,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             date
             path
             title
+            type
           }
         }
       }
@@ -28,10 +27,12 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
       return Promise.reject(result.errors);
     }
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    return result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      const template = templateTypes[node.frontmatter.type];
+
       createPage({
         path: node.frontmatter.path,
-        component: blogPostTemplate,
+        component: template,
         context: {}, // additional data can be passed via context
       });
     });

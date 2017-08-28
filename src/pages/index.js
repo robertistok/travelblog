@@ -9,7 +9,7 @@ export default function Index({ data }) {
       {posts
         .filter(post => post.node.frontmatter.title.length > 0)
         .map(({ node: post }) =>
-          (<div className="blog-post-preview" key={post.id}>
+          <div className="blog-post-preview" key={post.id}>
             <h1>
               <Link to={post.frontmatter.path}>
                 {post.frontmatter.title}
@@ -21,7 +21,7 @@ export default function Index({ data }) {
             <p>
               {post.excerpt}
             </p>
-          </div>),
+          </div>,
         )}
     </div>
   );
@@ -29,7 +29,9 @@ export default function Index({ data }) {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMarkdownRemark(
+      sort: { order: DESC, fields: [frontmatter___date] }
+    ) {
       edges {
         node {
           excerpt(pruneLength: 250)
