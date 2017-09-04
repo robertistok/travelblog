@@ -9,8 +9,15 @@ import './index.css';
 const Header = () =>
   <HeaderContainer>
     <Title>
-      <StyledLink to="/">Commuting Nomad</StyledLink>
+      <StyledLink to="/">CN</StyledLink>
     </Title>
+    <Nav>
+      <StyledLink to="/stories">Stories</StyledLink>
+      <StyledLink to="/pictures">Pictures</StyledLink>
+      <StyledLink to="/logs">Logs</StyledLink>
+      <StyledLink to="/hitchhiking">Hitchhiking</StyledLink>
+      <StyledLink to="/about">About me</StyledLink>
+    </Nav>
   </HeaderContainer>;
 
 const TemplateWrapper = ({ children }) =>
@@ -48,17 +55,20 @@ const MainContainer = styled.div`
 const HeaderContainer = styled.div`
   width: 100%;
   max-width: 740px;
-  margin: 0 auto;
-  height: 100px;
-
+  margin: 20px auto 40px auto;
+  padding: 10px 0;
 `;
 
 const Title = styled.h1`
-  margin: auto;
+  margin-right: 50px;
+  display: inline;
 `;
+
+const Nav = styled.nav`display: inline;`;
 
 const StyledLink = styled(Link)`
   margin-left: 30px;
+  ${''}
 `;
 
 export default TemplateWrapper;

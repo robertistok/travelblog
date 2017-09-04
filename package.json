@@ -13,9 +13,7 @@
     "gatsby-source-filesystem": "^1.4.6",
     "gatsby-transformer-remark": "^1.7.3"
   },
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "main": "n/a",
   "scripts": {
